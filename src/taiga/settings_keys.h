@@ -151,6 +151,12 @@ enum class AppSettingKey {
   TorrentFilterEnabled,
   TorrentFilterArchiveMaxCount,
 
+  // qBittorrent API
+  QbittorrentApiAddress,
+  QbittorrentApiUsername,
+  QbittorrentApiPassword,
+  QbittorrentApiCategory,
+
   // Internal
   AppPositionX,
   AppPositionY,

@@ -319,6 +319,19 @@ public:
   int GetTorrentFilterArchiveMaxCount() const;
   void SetTorrentFilterArchiveMaxCount(const int count);
 
+  // qBittorrent API Settings
+  std::wstring GetQbittorrentApiAddress() const;
+  void SetQbittorrentApiAddress(const std::wstring& value);
+  
+  std::wstring GetQbittorrentApiUsername() const;
+  void SetQbittorrentApiUsername(const std::wstring& value);
+  
+  std::wstring GetQbittorrentApiPassword() const;
+  void SetQbittorrentApiPassword(const std::wstring& value);
+  
+  std::wstring GetQbittorrentApiCategory() const;
+  void SetQbittorrentApiCategory(const std::wstring& value);
+
   // Internal
   int GetAppPositionX() const;
   void SetAppPositionX(const int x);
@@ -394,6 +407,12 @@ private:
   bool modified_ = false;
 
   base::Settings settings_;
+
+  // qBittorrent API settings
+  std::wstring qbittorrent_api_address_;
+  std::wstring qbittorrent_api_username_;
+  std::wstring qbittorrent_api_password_;
+  std::wstring qbittorrent_api_category_;
 };
 
 std::wstring GetCurrentUserDisplayName();

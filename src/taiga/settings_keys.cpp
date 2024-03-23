@@ -222,6 +222,12 @@ void Settings::InitKeyMap() const {
       {AppSettingKey::TorrentFilterEnabled, {"rss/torrent/filter/enabled", true}},
       {AppSettingKey::TorrentFilterArchiveMaxCount, {"rss/torrent/filter/archive_maxcount", 1000}},
 
+      // qBittorrent API
+      {AppSettingKey::QbittorrentApiAddress, {"qbittorrent/api/address", std::wstring{}}},
+      {AppSettingKey::QbittorrentApiUsername, {"qbittorrent/api/username", std::wstring{}}},
+      {AppSettingKey::QbittorrentApiPassword, {"qbittorrent/api/password", std::wstring{}}},
+      {AppSettingKey::QbittorrentApiCategory, {"qbittorrent/api/category", std::wstring{}}},
+
       // Internal
       {AppSettingKey::AppPositionX, {"program/position/x", -1}},
       {AppSettingKey::AppPositionY, {"program/position/y", -1}},
@@ -1304,6 +1310,40 @@ void Settings::SetTorrentFilterArchiveMaxCount(const int count) {
   set_value(AppSettingKey::TorrentFilterArchiveMaxCount, count);
 }
 
+
+// qBittorrent API
+
+std::wstring Settings::GetQbittorrentApiAddress() const {
+  return value<std::wstring>(AppSettingKey::QbittorrentApiAddress);
+}
+
+void Settings::SetQbittorrentApiAddress(const std::wstring& path) {
+  set_value(AppSettingKey::QbittorrentApiAddress, path);
+}
+
+std::wstring Settings::GetQbittorrentApiUsername() const {
+  return value<std::wstring>(AppSettingKey::QbittorrentApiUsername);
+}
+
+void Settings::SetQbittorrentApiUsername(const std::wstring& path) {
+  set_value(AppSettingKey::QbittorrentApiUsername, path);
+}
+
+std::wstring Settings::GetQbittorrentApiPassword() const {
+  return value<std::wstring>(AppSettingKey::QbittorrentApiPassword);
+}
+
+void Settings::SetQbittorrentApiPassword(const std::wstring& path) {
+  set_value(AppSettingKey::QbittorrentApiPassword, path);
+}
+
+std::wstring Settings::GetQbittorrentApiCategory() const {
+  return value<std::wstring>(AppSettingKey::QbittorrentApiCategory);
+}
+
+void Settings::SetQbittorrentApiCategory(const std::wstring& path) {
+  set_value(AppSettingKey::QbittorrentApiCategory, path);
+}
 // Internal
 
 int Settings::GetAppPositionX() const {

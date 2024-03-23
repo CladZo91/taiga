@@ -42,6 +42,10 @@ std::vector<AdvancedSetting> GetAdvancedSettingKeys() {
     AdvancedSetting::TorrentFilterArchiveMaxCount,
     AdvancedSetting::TorrentDownloadFileLocation,
     AdvancedSetting::TorrentDownloadUseMagnet,
+    AdvancedSetting::QbittorrentApiAddress,
+    AdvancedSetting::QbittorrentApiUsername,
+    AdvancedSetting::QbittorrentApiPassword,
+    AdvancedSetting::QbittorrentApiCategory,
   };
   return keys;
 }
@@ -84,6 +88,14 @@ std::wstring GetAdvancedSettingDescription(const AdvancedSetting key) {
       return L"Torrents / Download path for .torrent files";
     case AdvancedSetting::TorrentDownloadUseMagnet:
       return L"Torrents / Use magnet links if available";
+    case AdvancedSetting::QbittorrentApiAddress:
+      return L"qBittorent API / Address";
+    case AdvancedSetting::QbittorrentApiUsername:
+      return L"qBittorentAPI / Username";
+    case AdvancedSetting::QbittorrentApiPassword:
+      return L"qBittorentAPI / Password";
+    case AdvancedSetting::QbittorrentApiCategory:
+      return L"qBittorentAPI / Default Category";
   }
 
   return std::wstring{};
@@ -131,6 +143,14 @@ std::wstring GetAdvancedSettingValue(const AdvancedSetting key) {
       return taiga::settings.GetTorrentDownloadFileLocation();
     case AdvancedSetting::TorrentDownloadUseMagnet:
       return bool_to_wstr(taiga::settings.GetTorrentDownloadUseMagnet());
+    case AdvancedSetting::QbittorrentApiAddress:
+      return taiga::settings.GetQbittorrentApiAddress();
+    case AdvancedSetting::QbittorrentApiUsername:
+      return taiga::settings.GetQbittorrentApiUsername();
+    case AdvancedSetting::QbittorrentApiPassword:
+      return taiga::settings.GetQbittorrentApiPassword();
+    case AdvancedSetting::QbittorrentApiCategory:
+      return taiga::settings.GetQbittorrentApiCategory();
   }
 
   return std::wstring{};
@@ -191,6 +211,18 @@ void SetAdvancedSetting(const AdvancedSetting key, const std::wstring& value) {
       break;
     case AdvancedSetting::TorrentDownloadUseMagnet:
       taiga::settings.SetTorrentDownloadUseMagnet(ToBool(value));
+      break;
+    case AdvancedSetting::QbittorrentApiAddress:
+      taiga::settings.SetQbittorrentApiAddress(value);
+      break;
+    case AdvancedSetting::QbittorrentApiUsername:
+      taiga::settings.SetQbittorrentApiUsername(value);
+      break;
+    case AdvancedSetting::QbittorrentApiPassword:
+      taiga::settings.SetQbittorrentApiPassword(value);
+      break;
+    case AdvancedSetting::QbittorrentApiCategory:
+      taiga::settings.SetQbittorrentApiCategory(value);
       break;
   }
 }
