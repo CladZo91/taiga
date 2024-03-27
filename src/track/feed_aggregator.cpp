@@ -36,6 +36,7 @@
 #include "track/episode_util.h"
 #include "track/feed_filter_manager.h"
 #include "track/recognition.h"
+#include "track/qbittorrentapi.h"
 #include "ui/dialog.h"
 #include "ui/ui.h"
 
@@ -228,9 +229,34 @@ bool Aggregator::Download(const FeedItem* feed_item) {
     return false;
 
   if (IsMagnetLink(*feed_item)) {
-    ui::ChangeStatusText(L"Opening magnet link for \"" + feed_item->title + L"\"...");
-    const std::string empty_data;
-    HandleFeedDownload(feed, empty_data);
+  //  ui::ChangeStatusText(L"Opening magnet link for \"" + feed_item->title + L"\"...");
+  //  const std::string empty_data;
+  //  HandleFeedDownload(feed, empty_data);
+    if (!taiga::settings.GetQbittorrentApiAddress().empty()) {
+      // New logic to handle magnet link with qBittorrent API
+      QbittorrentAPI qbittorrent_api;
+
+      // Assume QbittorrentAPI has methods to handle authentication and adding
+      // the magnet link
+      if (!qbittorrent_api.IsAuthenticated() && !qbittorrent_api.Authenticate()) {
+        if (qbittorrent_api.SendMagnetLink(WstrToStr(feed_item->magnet_link))) {
+          // Successfully added the magnet link to qBittorrent
+          ui::ChangeStatusText(L"Magnet link sent to qBittorrent.");
+        } else {
+          // Failed to add the magnet link to qBittorrent
+          ui::ChangeStatusText(L"Failed to send magnet link to qBittorrent.");
+        }
+      } else {
+        // Failed to authenticate with qBittorrent
+        ui::ChangeStatusText(L"Failed to authenticate with qBittorrent.");
+      }
+    } else {
+      // Existing logic to open magnet link locally
+      ui::ChangeStatusText(L"Opening magnet link for \"" + feed_item->title + L"\"...");
+      const std::string empty_data;
+      HandleFeedDownload(feed, empty_data);
+    }
+    return true;  // End the function after handling the magnet link
 
   } else {
     const auto title = feed_item->title;
