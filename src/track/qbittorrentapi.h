@@ -12,7 +12,6 @@ namespace track {
 class QbittorrentAPI {
 public:
   QbittorrentAPI(); //Default Constructor
-  ~QbittorrentAPI();  // Default Destructor
   bool Authenticate();
   bool IsAuthenticated() const;
   bool SendMagnetLink(const std::string& magnet_link);
