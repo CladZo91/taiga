@@ -1,3 +1,4 @@
+#include "qbittorrentapi.h"
 #include "track/qbittorrentapi.h"
 
 #include "taiga/http.h"  // Ensure the correct path to your HTTP classes
@@ -43,9 +44,8 @@ namespace track {
     return false;
   }
 
-  // Implement the IsAuthenticated method
-  bool QbittorrentAPI::IsAuthenticated() {
-    // This method should probably be more robust and check with the server
+    // Implement the IsAuthenticated method
+  bool QbittorrentAPI::IsAuthenticated() const {
     return !session_cookie_.empty();
   }
 
